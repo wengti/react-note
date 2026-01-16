@@ -1,37 +1,30 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-export default function App() {
-  const [count, setCount] = useState(0)
-  const [name, setName] = useState('Alice')
-  const [myFunc, setMyFunc] = useState(null)
+export default function App(){
 
-  function handleClick() {
-    setCount(prevCount => prevCount + 1)
-    setName('Bob')
-    myFunc()
-  }
+        const [count, setCount] = useState(0)
+        
+        function handleClick(){
+            console.log('Button is clicked.')
+            setCount(prevCount => prevCount + 1)
+        }
+        
+        console.log('Rendering...')
 
-  const showVal = function() {
-    console.log('The state setter function captures these values: ')
-    console.log('count: ', count)
-    console.log('name: ',name)
-  }
+        useEffect( () => {
+            console.log('Side Effect...')
+        }, [count])
 
-  if(myFunc === null){
-    setMyFunc( showVal )
-  }
-
-  return (
-    <>
-      <button onClick={handleClick}>Click me</button>
-      <p>{count}</p>
-      <p>{name}</p>
-    </>
-  )
-}
+        return (
+            <>
+                <p>{count}</p>
+                <button onClick={handleClick}>Click me</button>
+            </>
+        )
+    }
 
 function Side() {
 
